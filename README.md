@@ -45,7 +45,7 @@ O estudo completo está em [`docs/identidade.md`](docs/identidade.md).
 - **Paleta:** Chumbo `#1F2327` (fundos escuros e texto), Chumbo claro `#2C3238` (superfícies no escuro), Bancada `#E9ECEF` e Inox `#D3D8DE` (fundos claros), Grafite `#4F5A66` (texto de apoio), Verde-circuito `#2FBF83` (o LED, uma vez por tela) e Verde-placa `#0F6B47` (links sobre fundo claro). Fugi do azul-e-laranja de assistência de shopping e do azul-gelo que já usei no site de ar-condicionado.
 - **Fontes:** Barlow (texto, inspiração DIN de manual de serviço) e JetBrains Mono (todos os números: OS, datas, preços, prazos). Ambas locais, licença SIL OFL 1.1, na pasta `fonts/`.
 - **Movimento:** uma abertura só (texto e foto sobem com fade, o LED da etiqueta acende por último) e respostas a ações. Com "reduzir movimento" ativado no sistema, nada se mexe.
-- **Foto do hero:** `img/hero.webp` é provisória, gerada por mim com Pillow (composição abstrata nas cores da marca). O prompt para a foto definitiva está em `docs/identidade.md`, seção "Foto do hero".
+- **Foto do hero:** `img/hero.webp` é uma foto gerada por IA no Canva (1440x1080), feita a partir do prompt da seção "Foto do hero" de `docs/identidade.md`.
 
 ## Como funciona por dentro
 
@@ -74,7 +74,7 @@ index.html              a página
 css/estilo.css          toda a folha de estilo
 js/site.js              as quatro funções e os dados de exemplo
 fonts/                  Barlow e JetBrains Mono (woff2) com licenças
-img/hero.webp           imagem do hero (provisória)
+img/hero.webp           foto do hero (gerada por IA no Canva)
 docs/identidade.md      estudo de identidade visual e prompt da foto
 docs/vistoria.md        vistoria de segurança
 docs/*.webp             capturas
