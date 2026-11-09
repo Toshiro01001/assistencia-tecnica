@@ -25,6 +25,61 @@
   }
   function faixa(a, b) { return reais(a) + " a " + reais(b); }
 
+  var MOVIMENTO_REDUZIDO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ------------------------------------------------------------------ */
+  /* 0. Movimento: entrada ao rolar, contador do hero, link atual        */
+  /* ------------------------------------------------------------------ */
+  var miolos = $$(".bloco .miolo");
+  if (!MOVIMENTO_REDUZIDO && "IntersectionObserver" in window && miolos.length) {
+    var vendo = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("visto");
+          vendo.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    miolos.forEach(function (m) {
+      /* blocos já visíveis na abertura entram prontos, sem esperar a rolagem */
+      var r = m.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.9) return;
+      m.classList.add("aos");
+      vendo.observe(m);
+    });
+  }
+
+  /* Contador dos números do hero: 0 até o alvo em 2s com easeOutQuart */
+  $$(".hero-numeros dd[data-alvo]").forEach(function (dd) {
+    var alvo = parseInt(dd.getAttribute("data-alvo"), 10);
+    var sufixo = dd.getAttribute("data-sufixo") || "";
+    if (MOVIMENTO_REDUZIDO || isNaN(alvo) || !window.requestAnimationFrame) return;
+    var inicio = null;
+    var DURACAO = 2000;
+    dd.textContent = "0" + sufixo;
+    function passo(agora) {
+      if (inicio === null) inicio = agora;
+      var t = Math.min(1, (agora - inicio) / DURACAO);
+      var e = 1 - Math.pow(1 - t, 4);
+      dd.textContent = Math.round(alvo * e) + sufixo;
+      if (t < 1) window.requestAnimationFrame(passo);
+    }
+    window.setTimeout(function () { window.requestAnimationFrame(passo); }, 400);
+  });
+
+  /* Link da seção visível fica em Verde-circuito na pílula */
+  var linksMenu = $$(".menu a[href^='#']");
+  if ("IntersectionObserver" in window && linksMenu.length) {
+    var secoes = linksMenu.map(function (a) { return $(a.getAttribute("href")); }).filter(Boolean);
+    var espiao = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        linksMenu.forEach(function (a) { a.classList.toggle("atual", a.getAttribute("href") === "#" + e.target.id); });
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    secoes.forEach(function (sec) { espiao.observe(sec); });
+  }
+
   /* ------------------------------------------------------------------ */
   /* Menu do celular                                                     */
   /* ------------------------------------------------------------------ */
@@ -137,6 +192,30 @@
     var nada = $("#os-nada");
     var barra = $("#os-barra");
     var listaPassos = $("#os-passos");
+    var colunaOs = $("#os-coluna");
+    var digitacao = 0; /* muda a cada consulta e cancela a digitação anterior */
+
+    /* Terminal: digita o texto de uma nota a 30 a 50ms por caractere */
+    function digita(el, texto, comCursor, ficha, atraso) {
+      el.textContent = "";
+      var cursor = null;
+      if (comCursor) {
+        cursor = document.createElement("span");
+        cursor.className = "cursor";
+        cursor.setAttribute("aria-hidden", "true");
+      }
+      var no = document.createTextNode("");
+      el.appendChild(no);
+      if (cursor) el.appendChild(cursor);
+      var i = 0;
+      function proximo() {
+        if (ficha !== digitacao) return;
+        if (i >= texto.length) return;
+        no.data = texto.slice(0, ++i);
+        window.setTimeout(proximo, 30 + Math.random() * 20);
+      }
+      window.setTimeout(proximo, atraso);
+    }
 
     function normaliza(v) {
       var s = v.toUpperCase().replace(/[^A-Z0-9]/g, "");
@@ -149,10 +228,14 @@
       var os = ORDENS[codigo];
       resultado.classList.remove("ativo");
       nada.classList.remove("ativo");
+      if (colunaOs) colunaOs.classList.add("consultado");
+      digitacao++;
       if (!os) {
         nada.classList.add("ativo");
         return false;
       }
+      var fichaAtual = digitacao;
+      var ordemNota = 0;
       var entrada = somaDias(hoje, os.entrada);
       var previsao = somaDias(hoje, os.previsao);
       $("#os-aparelho").textContent = os.aparelho;
@@ -194,8 +277,17 @@
         corpo.appendChild(titulo);
         var texto = document.createElement("p");
         texto.className = "passo-nota";
-        if (nota && i <= os.etapa) texto.textContent = nota[1];
-        else if (i === os.etapa) texto.textContent = "Etapa em andamento.";
+        var conteudoNota = "";
+        if (nota && i <= os.etapa) conteudoNota = nota[1];
+        else if (i === os.etapa) conteudoNota = "Etapa em andamento.";
+        if (conteudoNota) {
+          if (MOVIMENTO_REDUZIDO) {
+            texto.textContent = conteudoNota;
+          } else {
+            digita(texto, conteudoNota, i === os.etapa && os.etapa < 4, fichaAtual, 150 * ordemNota);
+            ordemNota++;
+          }
+        }
         corpo.appendChild(texto);
         var sr = document.createElement("span");
         sr.className = "visualmente-oculto";
@@ -442,7 +534,18 @@
     var TIPOS = { retirada: "Retirada em casa", entrega: "Entrega do aparelho pronto", visita: "Visita técnica" };
 
     /* Janelas fictícias já ocupadas: índice do dia útil -> lista de janelas */
-    var OCUPADAS = { 0: ["08:00 às 10:00", "10:00 às 12:00"], 1: ["13:30 às 15:30"], 3: ["08:00 às 10:00"], 5: ["15:30 às 18:00"] };
+    var OCUPADAS = { 0: ["08:00 às 10:00", "10:00 às 12:00"], 1: ["13:30 às 15:30"], 3: ["08:00 às 10:00"], 4: ["08:00 às 10:00", "10:00 às 12:00", "13:30 às 15:30", "15:30 às 18:00"], 5: ["15:30 às 18:00"] };
+    var TODAS_JANELAS = $$(".janela", formAg).map(function (b) { return b.getAttribute("data-janela"); });
+    var ladoAg = $("#ag-lado");
+
+    /* Quantas janelas de um dia estão fora: as ocupadas e, no sábado, as da tarde */
+    function janelasFora(d, i) {
+      var ocupadas = OCUPADAS[i] || [];
+      var sabado = d.getDay() === 6;
+      return TODAS_JANELAS.filter(function (j) {
+        return ocupadas.indexOf(j) !== -1 || (sabado && (j.indexOf("13:30") === 0 || j.indexOf("15:30") === 0));
+      }).length;
+    }
 
     var diasUteis = [];
     var cursor = somaDias(hoje, 1);
@@ -456,7 +559,10 @@
       b.className = "dia";
       b.setAttribute("aria-pressed", "false");
       b.setAttribute("data-indice", String(i));
-      b.setAttribute("aria-label", dataLonga(d));
+      var fora = janelasFora(d, i);
+      var estadoDia = fora === 0 ? "livre" : (fora >= TODAS_JANELAS.length ? "dia cheio" : "parte ocupada");
+      if (fora > 0) b.classList.add(fora >= TODAS_JANELAS.length ? "dia-cheio" : "dia-parcial");
+      b.setAttribute("aria-label", dataLonga(d) + ", " + estadoDia);
       var s = document.createElement("span");
       s.textContent = DIAS_SEMANA[d.getDay()];
       var f = document.createElement("strong");
@@ -573,6 +679,7 @@
         lista.appendChild(div);
       });
       var resumo = $("#ag-resumo");
+      if (ladoAg) ladoAg.classList.add("agendado");
       resumo.classList.add("ativo");
       resumo.setAttribute("tabindex", "-1");
       resumo.focus();
@@ -581,6 +688,7 @@
 
     $("#ag-novo").addEventListener("click", function () {
       $("#ag-resumo").classList.remove("ativo");
+      if (ladoAg) ladoAg.classList.remove("agendado");
       formAg.reset();
       $$("[aria-invalid]", formAg).forEach(function (c) { c.removeAttribute("aria-invalid"); });
       $$(".erro-msg", formAg).forEach(function (e) { e.textContent = ""; });

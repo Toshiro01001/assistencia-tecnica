@@ -26,7 +26,7 @@ Para quem não é da área: é a página de uma oficina de conserto onde você c
 
 ## Capturas
 
-Computador (1440 x 900):
+Computador (1280 x 900):
 
 ![Abertura no computador](docs/capa-desktop.webp)
 
@@ -44,8 +44,26 @@ O estudo completo está em [`docs/identidade.md`](docs/identidade.md).
 - **Ideia:** a bancada do técnico, limpa e organizada, e a etiqueta de OS amarrada no aparelho. A etiqueta (retângulo chumbo com furo e número em fonte mono) é o elemento gráfico que se repete.
 - **Paleta:** Chumbo `#1F2327` (fundos escuros e texto), Chumbo claro `#2C3238` (superfícies no escuro), Bancada `#E9ECEF` e Inox `#D3D8DE` (fundos claros), Grafite `#4F5A66` (texto de apoio), Verde-circuito `#2FBF83` (o LED, uma vez por tela) e Verde-placa `#0F6B47` (links sobre fundo claro). Fugi do azul-e-laranja de assistência de shopping e do azul-gelo que já usei no site de ar-condicionado.
 - **Fontes:** Barlow (texto, inspiração DIN de manual de serviço) e JetBrains Mono (todos os números: OS, datas, preços, prazos). Ambas locais, licença SIL OFL 1.1, na pasta `fonts/`.
-- **Movimento:** uma abertura só (texto e foto sobem com fade, o LED da etiqueta acende por último) e respostas a ações. Com "reduzir movimento" ativado no sistema, nada se mexe.
+- **Movimento:** abertura em blur-up (cada parte do hero sobe 30px e sai do desfoque em 800ms, em escada), os números do hero contam até o valor, cada seção entra uma vez ao aparecer na rolagem, as notas do técnico são digitadas no terminal da OS e as colunas da OS crescem. Com "reduzir movimento" ativado no sistema, nada se mexe e tudo aparece pronto.
 - **Foto do hero:** `img/hero.webp` é uma foto gerada por IA no Canva (1440x1080), feita a partir do prompt da seção "Foto do hero" de `docs/identidade.md`.
+- **Design systems (leva final):** a aparência segue dois sistemas de referência, developer-monetizati (blocos escuros: pílula de navegação com blur, selo com halo, terminal digitado, contador, cartões de métrica) e futureui (blocos claros: placa encaixada na faixa Chumbo, tiles que invertem no hover, calendário de células, gráfico de colunas, botões com degradê e véu). A seção "Design systems aplicados (leva final)" de `docs/identidade.md` lista componente por componente.
+
+## Fotos
+
+Todas as fotos em `img/` são **geradas por IA no Canva** e **ilustrativas**: não mostram uma oficina, um técnico ou um cliente de verdade. Os prompts estão em `docs/identidade.md`.
+
+| Arquivo | Onde aparece | Proporção e tamanho |
+|---|---|---|
+| `img/hero.webp` | hero | 4:3, 1440x1080 |
+| `img/servico-celular-placa.webp` | tile "Celulares e tablets" | 1:1, 1024x1024 |
+| `img/servico-notebook-aberto.webp` | tile "Notebooks e computadores" | 1:1, 1024x1024 |
+| `img/servico-lavadora-placa.webp` | tile "Eletrodomésticos" | 1:1, 1024x1024 |
+| `img/prateleira-aparelhos-etiquetados.webp` | coluna do resultado da OS, antes da consulta | 16:9, 1456x816 |
+| `img/oficina-bancadas.webp` | seção "A oficina", acima dos números | 3:2, 1456x970 |
+| `img/tecnico-lupa.webp` | seção "A oficina", ao lado dos dados | 3:4, 1088x1456 |
+| `img/caixa-transporte-retirada.webp` | coluna lateral de "Retirada e entrega", antes do agendamento | 4:3, 1456x1088 |
+
+Enquanto a versão do Canva não é colocada, os sete arquivos novos são placas lisas em Chumbo claro, no tamanho certo, só para segurar o lugar.
 
 ## Como funciona por dentro
 
@@ -74,7 +92,7 @@ index.html              a página
 css/estilo.css          toda a folha de estilo
 js/site.js              as quatro funções e os dados de exemplo
 fonts/                  Barlow e JetBrains Mono (woff2) com licenças
-img/hero.webp           foto do hero (gerada por IA no Canva)
+img/*.webp              fotos (geradas por IA no Canva, ilustrativas)
 docs/identidade.md      estudo de identidade visual e prompt da foto
 docs/vistoria.md        vistoria de segurança
 docs/*.webp             capturas

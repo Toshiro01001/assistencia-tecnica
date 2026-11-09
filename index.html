@@ -29,11 +29,12 @@
         Menu
       </button>
       <nav class="menu" id="menu" aria-label="Seções do site">
-        <a href="#acompanhar">Acompanhar OS</a>
+        <a href="#servicos">Serviços</a>
         <a href="#orcamento">Orçamento</a>
         <a href="#retirada">Retirada em casa</a>
         <a href="#duvidas">Dúvidas</a>
         <a href="#como-funciona">Como funciona</a>
+        <a class="menu-acao" href="#acompanhar">Acompanhar OS</a>
       </nav>
     </div>
   </header>
@@ -45,14 +46,15 @@
         <div>
           <h1 id="titulo-hero" class="entra">Seu aparelho quebrou. A gente diz <span class="grifo">o que é</span>, quanto custa e quando fica pronto.</h1>
           <p class="hero-apoio entra entra-2">Consertamos celulares, notebooks e eletrodomésticos em Cuiabá. Diagnóstico em até 24 horas, orçamento aprovado por você antes de qualquer reparo e cada etapa registrada na sua ordem de serviço.</p>
+          <p class="selo entra entra-2"><span class="led led-aceso" aria-hidden="true"></span>Bancada aberta · seg a sáb</p>
           <div class="hero-acoes entra entra-3">
             <a class="botao" href="#acompanhar">Acompanhar minha OS</a>
             <a class="botao botao-contorno" href="#orcamento">Estimar orçamento</a>
           </div>
           <dl class="hero-numeros entra entra-4">
-            <div><dt>horas para o diagnóstico</dt><dd>24</dd></div>
-            <div><dt>dias de garantia no reparo</dt><dd>90</dd></div>
-            <div><dt>dos aparelhos prontos em 5 dias</dt><dd>82%</dd></div>
+            <div><dt>horas para o diagnóstico</dt><dd data-alvo="24">24</dd></div>
+            <div><dt>dias de garantia no reparo</dt><dd data-alvo="90">90</dd></div>
+            <div><dt>dos aparelhos prontos em 5 dias</dt><dd data-alvo="82" data-sufixo="%">82%</dd></div>
           </dl>
         </div>
         <figure class="hero-figura entra entra-5">
@@ -67,14 +69,17 @@
 
     <!-- Serviços -->
     <section class="bloco claro" id="servicos" aria-labelledby="titulo-servicos">
+      <div class="placa">
       <div class="miolo">
         <div class="cabecalho-bloco">
+          <p class="olho"><span class="regua" aria-hidden="true"></span>serviços</p>
           <h2 id="titulo-servicos">O que consertamos</h2>
           <p>Três bancadas, três especialidades. Se o seu aparelho não está na lista, pergunte: boa parte do que chega aqui a gente resolve ou indica quem resolve.</p>
         </div>
         <ul class="servicos-lista">
           <li class="servico">
-            <svg class="servico-icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="14" y="4" width="20" height="40" rx="3"/><path d="M20 9h8M24 38v.5"/></svg>
+            <span class="servico-indice" aria-hidden="true">01</span>
+            <figure class="servico-foto"><img src="img/servico-celular-placa.webp" width="1024" height="1024" alt="Mãos adultas com luvas pretas segurando uma pinça sobre a placa lógica verde-escura de um celular aberto, em tapete antiestático chumbo." loading="lazy" decoding="async"></figure>
             <div>
               <h3>Celulares e tablets</h3>
               <p>Tela, bateria, conector de carga, câmera, alto-falante, placa com problema de carregamento ou que não liga. Trabalhamos com peças originais ou de primeira linha, e dizemos qual é qual no orçamento.</p>
@@ -85,7 +90,8 @@
             <p class="servico-prazo">Prazo típico <strong>1 a 3 dias</strong><br>Troca de tela no mesmo dia</p>
           </li>
           <li class="servico">
-            <svg class="servico-icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="8" y="8" width="32" height="22" rx="2"/><path d="M4 36h40v3H4zM19 30v3h10v-3"/></svg>
+            <span class="servico-indice" aria-hidden="true">02</span>
+            <figure class="servico-foto"><img src="img/servico-notebook-aberto.webp" width="1024" height="1024" alt="Notebook aberto de cabeça para baixo com a tampa inferior removida, placa-mãe verde-escura e cooler expostos, chaves de precisão alinhadas ao lado." loading="lazy" decoding="async"></figure>
             <div>
               <h3>Notebooks e computadores</h3>
               <p>Formatação com backup dos seus arquivos, troca de SSD e memória, teclado, tela, dobradiça, limpeza interna com troca de pasta térmica e reparo de placa-mãe em bancada própria.</p>
@@ -96,7 +102,8 @@
             <p class="servico-prazo">Prazo típico <strong>2 a 5 dias</strong><br>Formatação em 24 horas</p>
           </li>
           <li class="servico">
-            <svg class="servico-icone" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="10" y="4" width="28" height="40" rx="2"/><circle cx="24" cy="27" r="9"/><circle cx="24" cy="27" r="4"/><path d="M14 10h8M30 10h4"/></svg>
+            <span class="servico-indice" aria-hidden="true">03</span>
+            <figure class="servico-foto"><img src="img/servico-lavadora-placa.webp" width="1024" height="1024" alt="Painel traseiro de uma máquina de lavar aberto, mostrando a placa eletrônica verde e o chicote de fios, com um multímetro apoiado ao lado." loading="lazy" decoding="async"></figure>
             <div>
               <h3>Eletrodomésticos</h3>
               <p>Máquina de lavar, geladeira, micro-ondas, fogão com acendimento elétrico e TV. Visita técnica em Cuiabá e Várzea Grande ou retirada e entrega do aparelho na sua casa.</p>
@@ -108,6 +115,7 @@
           </li>
         </ul>
       </div>
+      </div>
     </section>
 
     <!-- Acompanhar OS -->
@@ -115,13 +123,17 @@
       <div class="miolo os-grade">
         <div>
           <div class="cabecalho-bloco">
+            <p class="olho"><span class="regua" aria-hidden="true"></span>ordem de serviço</p>
             <h2 id="titulo-os">Acompanhe a sua ordem de serviço</h2>
             <p>Digite o número que está na etiqueta do comprovante. Você vê em que etapa o conserto está, a previsão de entrega e o que o técnico anotou.</p>
           </div>
           <form class="os-form" id="form-os" novalidate>
             <div class="campo">
               <label for="codigo-os">Número da OS</label>
-              <input id="codigo-os" name="codigo" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="BK-00000" maxlength="8" aria-describedby="dica-os erro-os">
+              <div class="busca">
+                <svg class="busca-icone" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+                <input id="codigo-os" name="codigo" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="BK-00000" maxlength="8" aria-describedby="dica-os erro-os">
+              </div>
               <span class="dica" id="dica-os">Formato BK- seguido de cinco números.</span>
               <p class="erro-msg" id="erro-os" aria-live="polite"></p>
             </div>
@@ -143,6 +155,11 @@
             </div>
           </form>
         </div>
+        <div class="os-coluna" id="os-coluna">
+          <figure class="os-foto">
+            <img src="img/prateleira-aparelhos-etiquetados.webp" width="1456" height="816" alt="Prateleira de aço com celulares e notebooks embalados em saquinhos, cada um com uma etiqueta de papel branca amarrada, sob luz fria de oficina." loading="lazy" decoding="async">
+            <figcaption>Cada aparelho fica na prateleira com a sua etiqueta até a retirada.</figcaption>
+          </figure>
         <div aria-live="polite">
           <div class="os-resultado" id="os-resultado">
             <div class="os-cabeca">
@@ -158,21 +175,31 @@
               <div><dt>Previsão</dt><dd id="os-previsao" class="destaque">00/00</dd></div>
               <div><dt>Técnico</dt><dd id="os-tecnico">Nome</dd></div>
             </dl>
-            <div class="trilho" aria-hidden="true"><div class="trilho-barra" id="os-barra"></div></div>
-            <ol class="passos" id="os-passos" aria-label="Linha do tempo da ordem de serviço"></ol>
+            <div class="trilho" aria-hidden="true">
+              <div class="trilho-barra" id="os-barra">
+                <span class="trilho-col">recebido</span><span class="trilho-col">diagnóstico</span><span class="trilho-col">peça</span><span class="trilho-col">reparo</span><span class="trilho-col">pronto</span>
+              </div>
+            </div>
+            <div class="terminal">
+              <p class="terminal-titulo" aria-hidden="true"><span class="terminal-pontos"></span>notas-do-tecnico.log</p>
+              <ol class="passos" id="os-passos" aria-label="Linha do tempo da ordem de serviço"></ol>
+            </div>
           </div>
           <div class="os-nada" id="os-nada">
             <strong>Não achei essa OS.</strong> Confira o número na etiqueta do comprovante. Nesta demonstração só existem os quatro códigos de exemplo ao lado.
           </div>
+        </div>
         </div>
       </div>
     </section>
 
     <!-- Orçamento -->
     <section class="bloco claro" id="orcamento" aria-labelledby="titulo-orc">
+      <div class="placa">
       <div class="miolo orc-grade">
         <div>
           <div class="cabecalho-bloco">
+            <p class="olho"><span class="regua" aria-hidden="true"></span>orçamento</p>
             <h2 id="titulo-orc">Estime o orçamento antes de sair de casa</h2>
             <p>Escolha o aparelho e o defeito. Mostramos a faixa de preço que costumamos cobrar e o prazo. O valor fechado sai depois do diagnóstico, e você só paga se aprovar.</p>
           </div>
@@ -224,13 +251,16 @@
           </div>
         </aside>
       </div>
+      </div>
     </section>
 
     <!-- Retirada e entrega -->
     <section class="bloco inox claro" id="retirada" aria-labelledby="titulo-ag">
+      <div class="placa">
       <div class="miolo ag-grade">
         <div>
           <div class="cabecalho-bloco">
+            <p class="olho"><span class="regua" aria-hidden="true"></span>retirada e entrega</p>
             <h2 id="titulo-ag">Retirada e entrega em casa</h2>
             <p>Buscamos o aparelho na sua casa ou trabalho, em Cuiabá e Várzea Grande, e devolvemos pronto. Escolha o dia e a janela de horário; o resto a gente combina por telefone.</p>
           </div>
@@ -246,6 +276,7 @@
             <div class="campo">
               <span class="rotulo" id="rotulo-dia">Dia</span>
               <div class="dias" id="ag-dias" role="group" aria-labelledby="rotulo-dia"></div>
+              <p class="dias-legenda"><span><i class="ponto ponto-livre" aria-hidden="true"></i>livre</span><span><i class="ponto ponto-parcial" aria-hidden="true"></i>parte ocupada</span><span><i class="ponto ponto-cheio" aria-hidden="true"></i>dia cheio</span></p>
               <span class="dica">Segunda a sábado. Os sete próximos dias úteis a partir de hoje.</span>
             </div>
             <div class="campo">
@@ -306,6 +337,11 @@
             </div>
           </form>
         </div>
+        <div class="ag-lado" id="ag-lado">
+        <figure class="ag-foto">
+          <img src="img/caixa-transporte-retirada.webp" width="1456" height="1088" alt="Caixa de transporte acolchoada aberta com um notebook embalado e uma etiqueta de papel em branco, ao lado da porta aberta de um veículo cinza sem marca." loading="lazy" decoding="async">
+          <figcaption>O aparelho viaja em caixa acolchoada, embalado e etiquetado, da sua casa até a bancada.</figcaption>
+        </figure>
         <aside class="ag-resumo" id="ag-resumo" aria-live="polite">
           <h3><span class="led led-aceso" aria-hidden="true"></span>Agendamento registrado</h3>
           <p id="ag-resumo-frase">Nesta demonstração, nada foi enviado. Numa oficina real, este resumo chegaria por WhatsApp e o técnico confirmaria.</p>
@@ -313,20 +349,27 @@
           <p class="ag-aviso">Chegando, o técnico confere o aparelho com você, cola a etiqueta de OS e entrega o comprovante com o número para acompanhar aqui no site.</p>
           <button class="botao" type="button" id="ag-novo">Fazer outro agendamento</button>
         </aside>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- Dúvidas -->
     <section class="bloco claro" id="duvidas" aria-labelledby="titulo-faq">
+      <div class="placa">
       <div class="miolo">
         <div class="cabecalho-bloco">
+          <p class="olho"><span class="regua" aria-hidden="true"></span>dúvidas</p>
           <h2 id="titulo-faq">Dúvidas frequentes</h2>
           <p>Digite uma palavra, como "garantia", "backup" ou "molhou", e a lista filtra na hora.</p>
         </div>
         <div class="faq-busca">
           <div class="campo">
             <label for="faq-campo">Procurar nas dúvidas</label>
-            <input id="faq-campo" type="search" autocomplete="off" placeholder="Ex.: garantia">
+            <div class="busca">
+              <svg class="busca-icone" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5 14 14"/></svg>
+              <input id="faq-campo" type="search" autocomplete="off" placeholder="Ex.: garantia">
+            </div>
           </div>
           <p class="faq-contagem" id="faq-contagem" aria-live="polite"></p>
         </div>
@@ -374,36 +417,50 @@
         </div>
         <p class="faq-nada" id="faq-nada">Nenhuma dúvida com essa palavra. Tente outra, como "prazo" ou "pagamento", ou pergunte ao agendar a retirada.</p>
       </div>
+      </div>
     </section>
 
     <!-- Oficina -->
     <section class="bloco claro" id="oficina" aria-labelledby="titulo-oficina">
+      <div class="placa">
       <div class="miolo oficina-grade">
         <div>
           <div class="cabecalho-bloco">
+            <p class="olho"><span class="regua" aria-hidden="true"></span>oficina</p>
             <h2 id="titulo-oficina">A oficina</h2>
             <p>Três técnicos, uma bancada para cada especialidade, estoque das peças mais trocadas e um sistema de OS que o cliente consulta. É isso. Sem balcão de vendas, sem acessório pendurado.</p>
           </div>
+          <figure class="oficina-foto">
+            <img src="img/oficina-bancadas.webp" width="1456" height="970" alt="Oficina de assistência técnica com três bancadas em linha, tapetes antiestáticos chumbo, lupas com anel de luz e parede de chapa perfurada com ferramentas." loading="lazy" decoding="async">
+          </figure>
           <dl class="oficina-numeros">
             <div><dt>anos de bancada</dt><dd>11</dd></div>
             <div><dt>ordens de serviço por mês</dt><dd>340</dd></div>
-            <div><dt>voltam na garantia</dt><dd>2,1%</dd></div>
+            <div><dt>voltam na garantia</dt><dd>2,1%</dd><dd class="kpi-chip">menos de 3%</dd></div>
             <div><dt>técnicos certificados</dt><dd>3</dd></div>
           </dl>
         </div>
+        <div class="oficina-lado">
+        <figure class="responsavel-foto">
+          <img src="img/tecnico-lupa.webp" width="1088" height="1456" alt="Técnico adulto visto de costas e de perfil, inclinado sobre uma lupa de bancada acesa, com o rosto fora de foco e uma placa de circuito verde sob a luz." loading="lazy" decoding="async">
+        </figure>
         <dl class="oficina-dados">
           <div><dt>Endereço (fictício)</dt><dd>Rua das Bancadas, 1024, sala 3 · Jardim das Américas · Cuiabá, MT</dd></div>
           <div><dt>Horário</dt><dd><span class="mono">seg a sex 08:00 às 18:00</span> · <span class="mono">sáb 08:00 às 12:00</span></dd></div>
           <div><dt>Telefone e WhatsApp (fictícios)</dt><dd><span class="mono">(65) 90000-0000</span></dd></div>
           <div><dt>Responsável técnico</dt><dd>Marcos Tavares, técnico em eletrônica (nome fictício)</dd></div>
         </dl>
+        </div>
+      </div>
       </div>
     </section>
 
     <!-- Como isto funciona -->
     <section class="bloco claro" id="como-funciona" aria-labelledby="titulo-como">
+      <div class="placa">
       <div class="miolo">
         <div class="cabecalho-bloco">
+          <p class="olho"><span class="regua" aria-hidden="true"></span>como funciona</p>
           <h2 id="titulo-como">Como este site funciona</h2>
           <p>Esta página é uma demonstração da Mil e Uma Linhas! para mostrar a uma assistência técnica o que um site dela pode fazer. Tudo aqui é inventado, inclusive a oficina.</p>
         </div>
@@ -432,13 +489,14 @@
           <div class="tecnico-corpo">
             <p>HTML, CSS e JavaScript puros, sem framework, sem CDN e sem analytics. Um arquivo <code>css/estilo.css</code> e um <code>js/site.js</code>, carregados pelo próprio domínio.</p>
             <p><code>Content-Security-Policy</code> por meta: <code>default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'</code>. Nenhum script inline, nenhum estilo inline, nenhum <code>fetch</code>. Os formulários têm <code>novalidate</code> e <code>preventDefault</code>; não existe <code>action</code>.</p>
-            <p>Fontes locais em <code>fonts/</code> (Barlow e JetBrains Mono, licença SIL OFL 1.1, subconjunto latino em woff2). A imagem do hero é um webp local de 1600 x 1200.</p>
+            <p>Fontes locais em <code>fonts/</code> (Barlow e JetBrains Mono, licença SIL OFL 1.1, subconjunto latino em woff2). As fotos em <code>img/</code> são webp locais gerados por IA no Canva, ilustrativos.</p>
             <p>Os dados de exemplo (OS, tabela de preços, janelas indisponíveis) são constantes em <code>js/site.js</code>. O estado da interface é guardado em atributos <code>aria-pressed</code>, <code>hidden</code> e classes; a barra de progresso da OS usa classes <code>p1</code> a <code>p5</code> para não precisar de estilo inline.</p>
             <p>Único uso de <code>localStorage</code>: a chave <code>bancada-os</code>, com o último código consultado, só quando a caixa "lembrar" está marcada. Desmarcar apaga a chave. O acesso fica em <code>try/catch</code> para navegadores que bloqueiam armazenamento.</p>
             <p>Acessibilidade: <code>lang="pt-BR"</code>, link para pular ao conteúdo, foco visível, botões de verdade para dias e janelas (com <code>aria-pressed</code>), regiões <code>aria-live</code> para os resultados, contraste AA em todos os pares de cor e <code>prefers-reduced-motion</code> respeitado.</p>
             <p>Testes: <code>tests/site.cjs</code> com Playwright em 1280x900, iPhone 13 e 320px, verificando console limpo, ausência de rolagem horizontal, textos não cortados e cada função de ponta a ponta.</p>
           </div>
         </details>
+      </div>
       </div>
     </section>
   </main>

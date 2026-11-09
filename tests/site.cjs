@@ -54,7 +54,8 @@ async function roda(nome, contexto, sufixo) {
   page.on("pageerror", (e) => erros.push("pageerror: " + e.message));
   page.on("requestfailed", (r) => erros.push("request falhou: " + r.url()));
   await page.goto(URL, { waitUntil: "networkidle" });
-  await page.waitForTimeout(900);
+  /* espera a abertura em blur-up e o contador do hero terminarem (2,4s) */
+  await page.waitForTimeout(2600);
 
   checa(!(await rolagemHorizontal(page)), `${nome}: rolagem horizontal na abertura`);
   const cortados = await textosCortados(page);
@@ -72,7 +73,7 @@ async function roda(nome, contexto, sufixo) {
   }
 
   /* nas capturas de seção, o cabeçalho fixo sairia por cima; vira estático só para as fotos */
-  if (capturas) await page.evaluate(() => { document.querySelector(".topo").style.position = "static"; });
+  if (capturas) await page.evaluate(() => { document.querySelector(".topo").style.position = "static"; document.querySelectorAll(".aos").forEach((m) => m.classList.add("visto")); });
 
   /* 1. Acompanhamento de OS */
   await page.click('.etiqueta-botao[data-codigo="BK-48210"]');
