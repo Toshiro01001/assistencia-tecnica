@@ -32,3 +32,18 @@ Empresa, técnicos, cliente das OS (só iniciais), endereço, telefone, preços,
 - A CSP por meta não cobre o cabeçalho HTTP; no GitHub Pages não dá para configurar cabeçalhos. Para um site real com servidor próprio, o mesmo texto deve ir para o cabeçalho `Content-Security-Policy`.
 - O protocolo de agendamento (`AG-` mais seis dígitos) é gerado com `Math.random()` só para parecer real; não serve como identificador de verdade.
 - Numa oficina real, a consulta de OS por número exigiria uma segunda chave (por exemplo, os quatro últimos dígitos do telefone), para um número adivinhado não expor dados de outro cliente. Aqui os dados são fictícios, então a consulta é aberta de propósito.
+
+## Revisão de 08/11/2026 (leva final de design)
+
+Revisão feita depois de aplicar os design systems da leva final e encaixar as fotos geradas por IA no Canva.
+
+- **CSP:** a política do `index.html` é a mesma de antes da leva (conferida linha a linha). Continua sem `unsafe-inline`, sem `unsafe-eval` e sem origem externa.
+- **Script e estilo inline:** nenhum `<script>` inline, nenhum `<style>` e nenhum atributo `style` nas páginas. Os efeitos novos mudam só classes, `textContent` e propriedades CSS pelo CSSOM, que a CSP permite.
+- **Recursos externos:** nenhum script, fonte, imagem ou folha de estilo de fora. Os únicos links externos são de navegação comum (mileumalinhas.com.br e o perfil do GitHub).
+- **Bibliotecas:** nenhuma entrou. Movimento, vidro, contadores e revelação ao rolar são CSS e JavaScript escritos à mão, desligados com `prefers-reduced-motion`.
+- **innerHTML:** 5 uso(s) que já existiam antes da leva; nenhum foi acrescentado. Eles só limpam listas ou montam HTML com dados fixos do próprio site e números calculados, nunca com texto digitado pelo visitante.
+- **eval e Function:** nenhum uso.
+- **Armazenamento:** `localStorage` continua só com o que já existia (`bancada-os`), sem chave nova nesta leva.
+- **Dados pessoais:** nenhum dado pessoal real entrou. Pessoas, empresas, telefones e endereços seguem fictícios. As fotos não retratam pessoas reais.
+- **Imagens:** arquivos webp locais em `img/`, com `width`/`height`, `loading="lazy"` e `decoding="async"`. Nenhuma é carregada de outro domínio.
+- **Testes:** `tests/site.cjs` passa em 1280x900, iPhone 13 e 320px, sem erro de console e sem rolagem horizontal.
